@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.mapper.RegionMapper">
+    <resultMap id="region" type="com.example.demo.model.Region">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="abbreviate" column="abbreviate"/>
+    </resultMap>
+    <select id="findAll" resultType="com.example.demo.model.Region" resultMap="region">
+        select * from regions;
+    </select>
+    <select id="findById" parameterType="java.lang.Integer" resultType="com.example.demo.model.Region" resultMap="region">
+        select * from regions where id = #{id};
+    </select>
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        delete from regions where id = #{id};
+    </delete>
+    <insert id="insert" parameterType="com.example.demo.model.Region">
+        insert into regions (name, abbreviate) values (#{name}, #{abbreviate})
+    </insert>
+    <update id="updateById" parameterType="map">
+        update regions set name = #{region.name}, abbreviate = #{region.abbreviate} where id = #{id};
+    </update>
+</mapper>
